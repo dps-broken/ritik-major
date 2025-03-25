@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Conscious Quantifier</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-black min-h-screen flex flex-col justify-center items-center p-4">
+    <div class="container mx-auto max-w-6xl">
+        <div class="glassmorphic-card p-6 md:p-10 rounded-2xl shadow-2xl">
+            <h1 class="text-3xl md:text-4xl font-bold text-center mb-8 text-white">Carbon Conscious Quantifier</h1>
+            
+            <form id="carbonForm" class="grid md:grid-cols-2 gap-6">
+                <!-- Transportation Section -->
+                <div class="glassmorphic-section p-6 rounded-xl">
+                    <h2 class="text-xl font-semibold mb-4 text-white">Transportation (Weekly KMs)</h2>
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-2 items-center gap-4">
+                            <label class="text-white">Car:</label>
+                            <input type="number" name="car" min="0" step="0.1" class="form-input" required>
+                        </div>
+                        <div class="grid grid-cols-2 items-center gap-4">
+                            <label class="text-white">Bus:</label>
+                            <input type="number" name="bus" min="0" step="0.1" class="form-input" required>
+                        </div>
+                        <div class="grid grid-cols-2 items-center gap-4">
+                            <label class="text-white">Train:</label>
+                            <input type="number" name="train" min="0" step="0.1" class="form-input" required>
+                        </div>
+                        <div class="grid grid-cols-2 items-center gap-4">
+                            <label class="text-white">Rickshaw:</label>
+                            <input type="number" name="rickshaw" min="0" step="0.1" class="form-input" required>
+                        </div>
+                        <div class="grid grid-cols-2 items-center gap-4">
+                            <label class="text-white">Bike:</label>
+                            <input type="number" name="bike" min="0" step="0.1" class="form-input" required>
+                        </div>
+                        <div class="grid grid-cols-2 items-center gap-4">
+                            <label class="text-white">Flight:</label>
+                            <input type="number" name="flight" min="0" step="0.1" class="form-input" required>
+                        </div>
+                        <div class="grid grid-cols-2 items-center gap-4">
+                            <label class="text-white">Bicycle/Walk:</label>
+                            <input type="number" name="cyclewalk" min="0" step="0.1" class="form-input" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Inputs Section -->
+                <div class="glassmorphic-section p-6 rounded-xl space-y-4">
+                    <div>
+                        <label class="text-white mb-2 block">Monthly Electricity Usage (kWh):</label>
+                        <input type="number" name="electricity" min="0" step="0.1" class="form-input w-full" required>
+                    </div>
+
+                    <div>
+                        <label class="text-white mb-2 block">Diet Type:</label>
+                        <select name="diet" class="form-select w-full" required>
+                            <option value="1">Full Meat Diet</option>
+                            <option value="2">Omnivore Diet</option>
+                            <option value="3">Vegetarian Diet</option>
+                            <option value="4">Vegan Diet</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="text-white mb-2 block">Daily Water Usage (Litres):</label>
+                        <input type="number" name="water" min="0" step="0.1" class="form-input w-full" required>
+                    </div>
+
+                    <div>
+                        <label class="text-white mb-2 block">Weekly Waste Generation (kg):</label>
+                        <input type="number" name="waste" min="0" step="0.1" class="form-input w-full" required>
+                    </div>
+
+                    <div>
+                        <label class="text-white mb-2 block">Do you smoke?</label>
+                        <div class="flex items-center space-x-4 mb-2">
+                            <label class="flex items-center text-white">
+                                <input type="radio" name="smokingStatus" value="yes" class="mr-2"> Yes
+                            </label>
+                            <label class="flex items-center text-white">
+                                <input type="radio" name="smokingStatus" value="no" class="mr-2" checked> No
+                            </label>
+                        </div>
+                        <input type="number" name="cigarettes" min="0" step="1" class="form-input w-full" placeholder="Cigarettes per day" disabled>
+                    </div>
+                </div>
+            </form>
+
+            <div class="text-center mt-8">
+                <button type="submit" form="carbonForm" class="submit-button">
+                    Calculate Carbon Footprint
+                </button>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="resultsSection" class="hidden mt-8">
+            <div class="glassmorphic-card p-6 md:p-10 rounded-2xl shadow-2xl">
+                <h2 class="text-2xl font-bold text-center mb-6 text-white">Your Carbon Footprint Results</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-white">Detailed Breakdown</h3>
+                        <ul id="breakdownList" class="space-y-4"></ul>
+                        <p id="totalFootprint" class="text-xl font-bold mt-6 text-white"></p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-white">Suggestions</h3>
+                        <ul id="suggestionsList" class="space-y-4 text-gray-200"></ul>
+                    </div>
+                </div>
+
+                <!-- Charts Container -->
+                <div class="grid md:grid-cols-2 gap-6 mt-8">
+                    <div class="chart-container">
+                        <canvas id="barChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="pieChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container mt-8">
+                    <canvas id="lineChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
