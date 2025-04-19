@@ -42,6 +42,7 @@ body {
     border-radius: 16px;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.125);
+    position: relative;
 }
 
 .glassmorphic-section {
@@ -98,4 +99,14 @@ body {
     .glassmorphic-card, .glassmorphic-section {
         padding: 1rem;
     }
+}
+
+#totalFootprint{
+    position: absolute;
+    left: 600px;
+    top: 200px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text; /* Clip the background to the text */
+    -webkit-text-fill-color: transparent; /* Make the text transparent so the gradient shows through */
+
 }
