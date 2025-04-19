@@ -6,7 +6,22 @@
     --bg-light: #1e293b;
     --text-color: #e2e8f0;
 }
+h1 {
+    font-size: 72px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text; /* Clip the background to the text */
+    font-family: "Lavishly Yours", cursive;
+    font-weight: 900;
+    font-style: normal;
+    font-size: 90px;
+    -webkit-text-fill-color: transparent; /* Make the text transparent so the gradient shows through */
+  }
+  h2,h3{
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text; /* Clip the background to the text */
+    -webkit-text-fill-color: transparent; /* Make the text transparent so the gradient shows through */
 
+  }
 * {
     margin: 0;
     padding: 0;
@@ -15,9 +30,11 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: var(--bg-dark);
+    /* background-color: var(--bg-dark); */
     color: var(--text-color);
     line-height: 1.6;
+    /* background-color: rgb(77, 186, 83); */
+    background: url('https://imgs.search.brave.com/6qkya-UR97le4Q_1wjXxNFhNqFz9MvGHVwb7tneiJGg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTgz/MDIxNDEzL3Bob3Rv/L2NhcmJvbi1mb290/cHJpbnQtaW1wcmlu/dGVkLWluLXRoZS1n/cmFzcy5qcGc_cz02/MTJ4NjEyJnc9MCZr/PTIwJmM9TWlfN2p3/eTFaSlpnMFA1OW84/ZVhOVDljSjYxeXlr/X3JKWE55MDJObHFi/ST0');
 }
 
 .glassmorphic-card {
